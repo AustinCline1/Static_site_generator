@@ -62,7 +62,7 @@ def split_nodes_image(old_nodes):
             new_nodes.append(old_node)
             continue
         for image in images:
-            sections = original_text.text.split(f"![{image[0]}]({image[1]})", 1)
+            sections = original_text.split(f"![{image[0]}]({image[1]})", 1)
             if len(sections) != 2:
                 raise ValueError("invalid markdown, formatted section not closed")
             if sections[0] != "":
@@ -99,3 +99,25 @@ def split_nodes_link(old_nodes):
         if original_text != "":
             new_nodes.append(TextNode(original_text, TextType.TEXT))
     return new_nodes
+
+
+def text_to_textnodes(text):
+    new_nodes = []
+    nodes = [TextNode(text, TextType.TEXT)]
+    nodes = split_nodes_delimiter(nodes,"**", TextType.BOLD)
+    nodes = split_nodes_delimiter(nodes,"_", TextType.ITALIC)
+    nodes = split_nodes_delimiter(nodes,"`", TextType.CODE)
+    nodes = split_nodes_image(nodes)
+    nodes = split_nodes_link(nodes)
+    return nodes
+
+
+def markdown_to_blocks(markdown):
+    blocks = []
+    lines = markdown.split("\n\n")
+    for line in lines:
+        line = line.strip(" \n")
+        if line == "":
+            continue
+        blocks.append(line)
+    return blocks
