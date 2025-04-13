@@ -12,12 +12,10 @@ class HTMLNode:
     def props_to_html(self):
         if not self.props or self.props is None:
             return ""
-        prop_list = []
+        prop_string = ""
         for key in self.props:
-            prop_string = f' {key}="{self.props[key]}"'
-            prop_list.append(prop_string)
-
-        return "".join(prop_list)
+            prop_string += f' {key}="{self.props[key]}"'
+        return prop_string
 
 
     def __repr__(self):
