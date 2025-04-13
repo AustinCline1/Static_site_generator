@@ -22,6 +22,8 @@ def copy(source, destination):
         else:
             copy(from_path, to_path)
 
+
+
 def main() -> None:
     basepath = default_basepath
     if len(sys.argv) > 1:
@@ -34,9 +36,7 @@ def main() -> None:
     copy(dir_path_static, dir_path_public)
 
     print("Generating pages...")
-    generate_pages_recursive(
-        dir_path_content, template_path, dir_path_public,basepath
-    )
+    generate_pages_recursive(dir_path_content, template_path, dir_path_public,basepath)
 
 
 main()

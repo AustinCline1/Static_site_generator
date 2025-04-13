@@ -11,7 +11,7 @@ def generate_pages_recursive(dir_path_content,template_path,dest_dir_path,basepa
             dest_path = Path(dest_path).with_suffix(".html")
             generate_page(from_path, template_path, dest_path ,basepath)
         else:
-            generate_pages_recursive(from_path,template_path,dest_path, basepath)
+            generate_pages_recursive(from_path,template_path,dest_path,basepath)
 
 
 def generate_page(from_path, template_path, dest_path,basepath):
@@ -46,4 +46,4 @@ def extract_title(markdown):
     for line in lines:
         if line.startswith("# "):
             return line[2:]
-        raise ValueError("invalid markdown, no title found")
+    raise ValueError("invalid markdown, no title found")
